@@ -72,8 +72,8 @@ void main() {
     test('should check if the device is online', () async {
       // arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(mockRemoteDataSource.getNowPlayingMovies())
-          .thenAnswer((_) async => []);
+      when(mockRemoteDataSource.getNowPlayingMovies()).thenAnswer((_) async => []);
+      when(mockLocalDataSource.getCachedNowPlayingMovies()).thenAnswer((_) async => []);
       // act
       await repository.getNowPlayingMovies();
       // assert
@@ -86,32 +86,36 @@ void main() {
       });
 
       test(
-          'should return remote data when the call to remote data source is successful',
-              () async {
-            // arrange
-            when(mockRemoteDataSource.getNowPlayingMovies())
-                .thenAnswer((_) async => tMovieModelList);
-            // act
-            final result = await repository.getNowPlayingMovies();
-            // assert
-            verify(mockRemoteDataSource.getNowPlayingMovies());
-            /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-            final resultList = result.getOrElse(() => []);
-            expect(resultList, tMovieList);
-          });
-
-      test(
           'should cache data locally when the call to remote data source is successful',
               () async {
             // arrange
             when(mockRemoteDataSource.getNowPlayingMovies())
                 .thenAnswer((_) async => tMovieModelList);
+            when(mockLocalDataSource.getCachedNowPlayingMovies())
+                .thenAnswer((_) async => []);
             // act
             await repository.getNowPlayingMovies();
             // assert
             verify(mockRemoteDataSource.getNowPlayingMovies());
             verify(mockLocalDataSource.cacheNowPlayingMovies([testMovieCache]));
           });
+
+      test(
+        'should return local data when caching data from remote is successful',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getNowPlayingMovies())
+              .thenAnswer((_) async => tMovieModelList);
+          when(mockLocalDataSource.getCachedNowPlayingMovies())
+              .thenAnswer((_) async => [testMovieCache]);
+          // act
+          final result = await repository.getNowPlayingMovies();
+          // assert
+          verify(mockLocalDataSource.getCachedNowPlayingMovies());
+          final resultList = result.getOrElse(() => []);
+          expect(resultList, [testMovieFromCache]);
+        },
+      );
 
       test(
           'should return server failure when the call to remote data source is unsuccessful',

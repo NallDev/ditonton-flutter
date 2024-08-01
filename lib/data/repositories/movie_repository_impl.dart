@@ -26,10 +26,12 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await remoteDataSource.getNowPlayingMovies();
-        localDataSource.cacheNowPlayingMovies(
-            result.map((movie) => MovieTable.fromDTO(movie)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
+        final resultNetwork = await remoteDataSource.getNowPlayingMovies();
+        await localDataSource.cacheNowPlayingMovies(
+            resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
+
+        final resultLocal = await localDataSource.getCachedNowPlayingMovies();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
       }
@@ -69,13 +71,24 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies() async {
-    try {
-      final result = await remoteDataSource.getPopularMovies();
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+    if (await networkInfo.isConnected) {
+      try {
+        final resultNetwork = await remoteDataSource.getPopularMovies();
+        await localDataSource.cachePopularMovies(
+            resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
+
+        final resultLocal = await localDataSource.getCachedPopularMovies();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      try {
+        final result = await localDataSource.getCachedPopularMovies();
+        return Right(result.map((model) => model.toEntity()).toList());
+      } catch (e) {
+        return Left(DatabaseFailure('No Cache'));
+      }
     }
   }
 
