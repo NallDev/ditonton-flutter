@@ -27,18 +27,17 @@ class MovieRepositoryImpl implements MovieRepository {
     if (await networkInfo.isConnected) {
       try {
         final resultNetwork = await remoteDataSource.getNowPlayingMovies();
-        await localDataSource.cacheNowPlayingMovies(
+        localDataSource.cacheNowPlayingMovies(
             resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
 
-        final resultLocal = await localDataSource.getCachedNowPlayingMovies();
-        return Right(resultLocal.map((model) => model.toEntity()).toList());
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
       }
     } else {
       try {
-        final result = await localDataSource.getCachedNowPlayingMovies();
-        return Right(result.map((model) => model.toEntity()).toList());
+        final resultLocal = await localDataSource.getCachedNowPlayingMovies();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
       } catch (e) {
         return Left(DatabaseFailure('No Cache'));
       }
@@ -74,18 +73,17 @@ class MovieRepositoryImpl implements MovieRepository {
     if (await networkInfo.isConnected) {
       try {
         final resultNetwork = await remoteDataSource.getPopularMovies();
-        await localDataSource.cachePopularMovies(
+        localDataSource.cachePopularMovies(
             resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
 
-        final resultLocal = await localDataSource.getCachedPopularMovies();
-        return Right(resultLocal.map((model) => model.toEntity()).toList());
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
       } on ServerException {
         return Left(ServerFailure(''));
       }
     } else {
       try {
-        final result = await localDataSource.getCachedPopularMovies();
-        return Right(result.map((model) => model.toEntity()).toList());
+        final resultLocal = await localDataSource.getCachedPopularMovies();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
       } catch (e) {
         return Left(DatabaseFailure('No Cache'));
       }
@@ -94,13 +92,23 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies() async {
-    try {
-      final result = await remoteDataSource.getTopRatedMovies();
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+    if (await networkInfo.isConnected) {
+      try {
+        final resultNetwork = await remoteDataSource.getTopRatedMovies();
+        localDataSource.cacheTopRatedMovies(
+            resultNetwork.map((movies) => MovieTable.fromDTO(movies)).toList());
+
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      try {
+        final resultLocal = await localDataSource.getCachedTopRatedMovies();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
+      } catch (e) {
+        return Left(DatabaseFailure('No Cache'));
+      }
     }
   }
 
