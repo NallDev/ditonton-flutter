@@ -97,4 +97,45 @@ void main() {
       expect(result, [testMovieTable]);
     });
   });
+
+  group('cache now playing movies', () {
+    final tMovieList = [testMovieTable];
+
+    test('should clear cache and insert now playing movies into cache', () async {
+      // arrange
+      when(mockDatabaseHelper.clearCache('now playing'))
+          .thenAnswer((_) async => 1);
+      when(mockDatabaseHelper.insertCacheTransaction(tMovieList, 'now playing'))
+          .thenAnswer((_) async => 1);
+      // act
+      await dataSource.cacheNowPlayingMovies(tMovieList);
+      // assert
+      verify(mockDatabaseHelper.clearCache('now playing')).called(1);
+      verify(mockDatabaseHelper.insertCacheTransaction(tMovieList, 'now playing')).called(1);
+    });
+  });
+
+  group('get cached now playing movies', () {
+    final tMovieList = [testMovieMap];
+
+    test('should return list of now playing movies when there is data in cache', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheMovies('now playing'))
+          .thenAnswer((_) async => tMovieList);
+      // act
+      final result = await dataSource.getCachedNowPlayingMovies();
+      // assert
+      expect(result, [testMovieTable]);
+    });
+
+    test('should throw Exception when there is no data now playing movies in cache', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheMovies('now playing'))
+          .thenAnswer((_) async => []);
+      // act
+      final call = dataSource.getCachedNowPlayingMovies();
+      // assert
+      expect(() => call, throwsA(isA<Exception>()));
+    });
+  });
 }

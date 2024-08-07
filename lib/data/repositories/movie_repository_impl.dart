@@ -28,7 +28,7 @@ class MovieRepositoryImpl implements MovieRepository {
       try {
         final resultNetwork = await remoteDataSource.getNowPlayingMovies();
         localDataSource.cacheNowPlayingMovies(
-            resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
+            resultNetwork.map((movie) => MovieTable.fromDTOMovie(movie)).toList());
 
         return Right(resultNetwork.map((model) => model.toEntity()).toList());
       } on ServerException {
@@ -74,7 +74,7 @@ class MovieRepositoryImpl implements MovieRepository {
       try {
         final resultNetwork = await remoteDataSource.getPopularMovies();
         localDataSource.cachePopularMovies(
-            resultNetwork.map((movie) => MovieTable.fromDTO(movie)).toList());
+            resultNetwork.map((movie) => MovieTable.fromDTOMovie(movie)).toList());
 
         return Right(resultNetwork.map((model) => model.toEntity()).toList());
       } on ServerException {
@@ -96,7 +96,7 @@ class MovieRepositoryImpl implements MovieRepository {
       try {
         final resultNetwork = await remoteDataSource.getTopRatedMovies();
         localDataSource.cacheTopRatedMovies(
-            resultNetwork.map((movies) => MovieTable.fromDTO(movies)).toList());
+            resultNetwork.map((movies) => MovieTable.fromDTOMovie(movies)).toList());
 
         return Right(resultNetwork.map((model) => model.toEntity()).toList());
       } on ServerException {

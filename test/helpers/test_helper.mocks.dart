@@ -493,6 +493,72 @@ class MockMovieLocalDataSource extends _i1.Mock
         returnValue:
             _i6.Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]),
       ) as _i6.Future<List<_i14.MovieTable>>);
+
+  @override
+  _i6.Future<void> cacheToNowPlayingSeries(List<_i14.MovieTable>? movies) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cacheToNowPlayingSeries,
+          [movies],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<List<_i14.MovieTable>> getCachedNowPlayingSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCachedNowPlayingSeries,
+          [],
+        ),
+        returnValue:
+            _i6.Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]),
+      ) as _i6.Future<List<_i14.MovieTable>>);
+
+  @override
+  _i6.Future<void> cacheToPopularSeries(List<_i14.MovieTable>? movies) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cacheToPopularSeries,
+          [movies],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<List<_i14.MovieTable>> getCachedPopularSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCachedPopularSeries,
+          [],
+        ),
+        returnValue:
+            _i6.Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]),
+      ) as _i6.Future<List<_i14.MovieTable>>);
+
+  @override
+  _i6.Future<void> cacheToTopRatedSeries(List<_i14.MovieTable>? movies) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cacheToTopRatedSeries,
+          [movies],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<List<_i14.MovieTable>> getCachedTopRatedSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCachedTopRatedSeries,
+          [],
+        ),
+        returnValue:
+            _i6.Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]),
+      ) as _i6.Future<List<_i14.MovieTable>>);
 }
 
 /// A class which mocks [DatabaseHelper].
