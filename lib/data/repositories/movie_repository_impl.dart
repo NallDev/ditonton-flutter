@@ -113,6 +113,72 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
+  Future<Either<Failure, List<Movie>>> getNowPlayingSeries() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final resultNetwork = await remoteDataSource.getNowPlayingSeries();
+        localDataSource.cacheToNowPlayingSeries(
+            resultNetwork.map((movie) => MovieTable.fromDTOSeries(movie)).toList());
+
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      try {
+        final resultLocal = await localDataSource.getCachedNowPlayingSeries();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
+      } catch (e) {
+        return Left(DatabaseFailure('No Cache'));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getPopularSeries() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final resultNetwork = await remoteDataSource.getPopularSeries();
+        localDataSource.cacheToPopularSeries(
+            resultNetwork.map((movie) => MovieTable.fromDTOSeries(movie)).toList());
+
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      try {
+        final resultLocal = await localDataSource.getCachedPopularSeries();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
+      } catch (e) {
+        return Left(DatabaseFailure('No Cache'));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getTopRatedSeries() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final resultNetwork = await remoteDataSource.getTopRatedSeries();
+        localDataSource.cacheToTopRatedSeries(
+            resultNetwork.map((movie) => MovieTable.fromDTOSeries(movie)).toList());
+
+        return Right(resultNetwork.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      try {
+        final resultLocal = await localDataSource.getCachedTopRatedSeries();
+        return Right(resultLocal.map((model) => model.toEntity()).toList());
+      } catch (e) {
+        return Left(DatabaseFailure('No Cache'));
+      }
+    }
+  }
+
+  @override
   Future<Either<Failure, List<Movie>>> searchMovies(String query) async {
     try {
       final result = await remoteDataSource.searchMovies(query);

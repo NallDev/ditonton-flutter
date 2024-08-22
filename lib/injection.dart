@@ -7,8 +7,11 @@ import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
+import 'package:ditonton/domain/usecases/get_now_playing_series.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_series.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_series.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
@@ -34,6 +37,9 @@ void init() {
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
+      getNowPlayingSeries: locator(),
+      getPopularSeries: locator(),
+      getTopRatedSeries: locator(),
     ),
   );
   locator.registerFactory(
@@ -70,6 +76,9 @@ void init() {
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
   locator.registerLazySingleton(() => GetPopularMovies(locator()));
   locator.registerLazySingleton(() => GetTopRatedMovies(locator()));
+  locator.registerLazySingleton(() => GetNowPlayingSeries(locator()));
+  locator.registerLazySingleton(() => GetPopularSeries(locator()));
+  locator.registerLazySingleton(() => GetTopRatedSeries(locator()));
   locator.registerLazySingleton(() => GetMovieDetail(locator()));
   locator.registerLazySingleton(() => GetMovieRecommendations(locator()));
   locator.registerLazySingleton(() => SearchMovies(locator()));

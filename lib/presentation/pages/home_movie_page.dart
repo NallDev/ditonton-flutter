@@ -25,7 +25,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         () => Provider.of<MovieListNotifier>(context, listen: false)
           ..fetchNowPlayingMovies()
           ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+          ..fetchTopRatedMovies()
+          ..fetchNowPlayingSeries()
+          ..fetchPopularSeries()
+          ..fetchTopRatedSeries());
   }
 
   @override
@@ -128,6 +131,57 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   );
                 } else if (state == RequestState.Loaded) {
                   return MovieList(data.topRatedMovies);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+              _buildSubHeading(
+                title: 'Now Playing Series',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              ),
+              Consumer<MovieListNotifier>(builder: (context, data, child) {
+                final state = data.nowPlayingSeriesState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return MovieList(data.nowPlayingSeries);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+              _buildSubHeading(
+                title: 'Popular Series',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              ),
+              Consumer<MovieListNotifier>(builder: (context, data, child) {
+                final state = data.popularSeriesState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return MovieList(data.popularSeries);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+              _buildSubHeading(
+                title: 'Top Rated Series',
+                onTap: () =>
+                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              ),
+              Consumer<MovieListNotifier>(builder: (context, data, child) {
+                final state = data.topRatedSeriesState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return MovieList(data.topRatedSeries);
                 } else {
                   return Text('Failed');
                 }

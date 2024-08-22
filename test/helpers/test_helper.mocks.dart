@@ -141,6 +141,57 @@ class MockMovieRepository extends _i1.Mock implements _i5.MovieRepository {
       ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>);
 
   @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>> getNowPlayingSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNowPlayingSeries,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>.value(
+            _FakeEither_0<_i7.Failure, List<_i8.Movie>>(
+          this,
+          Invocation.method(
+            #getNowPlayingSeries,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>> getPopularSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getPopularSeries,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>.value(
+            _FakeEither_0<_i7.Failure, List<_i8.Movie>>(
+          this,
+          Invocation.method(
+            #getPopularSeries,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>);
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>> getTopRatedSeries() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTopRatedSeries,
+          [],
+        ),
+        returnValue: _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>.value(
+            _FakeEither_0<_i7.Failure, List<_i8.Movie>>(
+          this,
+          Invocation.method(
+            #getTopRatedSeries,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.Either<_i7.Failure, List<_i8.Movie>>>);
+
+  @override
   _i6.Future<_i2.Either<_i7.Failure, _i9.MovieDetail>> getMovieDetail(
           int? id) =>
       (super.noSuchMethod(

@@ -10,8 +10,11 @@ import 'package:ditonton/common/failure.dart' as _i6;
 import 'package:ditonton/domain/entities/movie.dart' as _i7;
 import 'package:ditonton/domain/repositories/movie_repository.dart' as _i2;
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart' as _i4;
+import 'package:ditonton/domain/usecases/get_now_playing_series.dart' as _i10;
 import 'package:ditonton/domain/usecases/get_popular_movies.dart' as _i8;
+import 'package:ditonton/domain/usecases/get_popular_series.dart' as _i11;
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart' as _i9;
+import 'package:ditonton/domain/usecases/get_top_rated_series.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -124,6 +127,112 @@ class MockGetPopularMovies extends _i1.Mock implements _i8.GetPopularMovies {
 /// See the documentation for Mockito's code generation for more information.
 class MockGetTopRatedMovies extends _i1.Mock implements _i9.GetTopRatedMovies {
   MockGetTopRatedMovies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.Movie>>(
+          this,
+          Invocation.method(
+            #execute,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+}
+
+/// A class which mocks [GetNowPlayingSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetNowPlayingSeries extends _i1.Mock
+    implements _i10.GetNowPlayingSeries {
+  MockGetNowPlayingSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.Movie>>(
+          this,
+          Invocation.method(
+            #execute,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+}
+
+/// A class which mocks [GetPopularSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetPopularSeries extends _i1.Mock implements _i11.GetPopularSeries {
+  MockGetPopularSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(
+            _FakeEither_1<_i6.Failure, List<_i7.Movie>>(
+          this,
+          Invocation.method(
+            #execute,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+}
+
+/// A class which mocks [GetTopRatedSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetTopRatedSeries extends _i1.Mock implements _i12.GetTopRatedSeries {
+  MockGetTopRatedSeries() {
     _i1.throwOnMissingStub(this);
   }
 
