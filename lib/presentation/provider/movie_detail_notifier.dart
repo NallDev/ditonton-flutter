@@ -9,19 +9,26 @@ import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/usecases/get_series_detail.dart';
+import '../../domain/usecases/get_series_recommendations.dart';
+
 class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetMovieDetail getMovieDetail;
+  final GetSeriesDetail getSeriesDetail;
   final GetMovieRecommendations getMovieRecommendations;
+  final GetSeriesRecommendations getSeriesRecommendations;
   final GetWatchListStatus getWatchListStatus;
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
 
   MovieDetailNotifier({
     required this.getMovieDetail,
+    required this.getSeriesDetail,
     required this.getMovieRecommendations,
+    required this.getSeriesRecommendations,
     required this.getWatchListStatus,
     required this.saveWatchlist,
     required this.removeWatchlist,
@@ -66,6 +73,38 @@ class MovieDetailNotifier extends ChangeNotifier {
             _message = failure.message;
           },
           (movies) {
+            _recommendationState = RequestState.Loaded;
+            _movieRecommendations = movies;
+          },
+        );
+        _movieState = RequestState.Loaded;
+        notifyListeners();
+      },
+    );
+  }
+
+
+  Future<void> fetchSeriesDetail(int id) async {
+    _movieState = RequestState.Loading;
+    notifyListeners();
+    final detailResult = await getSeriesDetail.execute(id);
+    final recommendationResult = await getSeriesRecommendations.execute(id);
+    detailResult.fold(
+          (failure) {
+        _movieState = RequestState.Error;
+        _message = failure.message;
+        notifyListeners();
+      },
+          (movie) {
+        _recommendationState = RequestState.Loading;
+        _movie = movie;
+        notifyListeners();
+        recommendationResult.fold(
+              (failure) {
+            _recommendationState = RequestState.Error;
+            _message = failure.message;
+          },
+              (movies) {
             _recommendationState = RequestState.Loaded;
             _movieRecommendations = movies;
           },

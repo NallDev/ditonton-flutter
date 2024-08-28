@@ -37,7 +37,8 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         title TEXT,
         overview TEXT,
-        posterPath TEXT
+        posterPath TEXT,
+        isSeries INTEGER
       );
     ''');
     await db.execute('''
@@ -46,7 +47,8 @@ class DatabaseHelper {
         title TEXT,
         overview TEXT,
         posterPath TEXT,
-        category TEXT
+        category TEXT,
+        isSeries INTEGER
       );
     ''');
   }

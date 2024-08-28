@@ -235,7 +235,10 @@ class MovieList extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   MovieDetailPage.ROUTE_NAME,
-                  arguments: movie.id,
+                  arguments: {
+                    'id': movie.id,
+                    'isSeries': movie.isSeries,
+                  },
                 );
               },
               child: ClipRRect(

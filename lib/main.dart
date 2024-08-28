@@ -65,10 +65,11 @@ class MyApp extends StatelessWidget {
             case TopRatedMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
             case MovieDetailPage.ROUTE_NAME:
-              final id = settings.arguments as int;
+              final args = settings.arguments as Map<String, dynamic>;
               return MaterialPageRoute(
-                builder: (_) => MovieDetailPage(id: id),
-                settings: settings,
+                builder: (context) {
+                  return MovieDetailPage.withArguments(args);
+                },
               );
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());

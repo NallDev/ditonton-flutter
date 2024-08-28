@@ -27,6 +27,8 @@ import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 import 'common/network_info.dart';
+import 'domain/usecases/get_series_detail.dart';
+import 'domain/usecases/get_series_recommendations.dart';
 
 final locator = GetIt.instance;
 
@@ -45,7 +47,9 @@ void init() {
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
+      getSeriesDetail: locator(),
       getMovieRecommendations: locator(),
+      getSeriesRecommendations: locator(),
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
       removeWatchlist: locator(),
@@ -81,6 +85,8 @@ void init() {
   locator.registerLazySingleton(() => GetTopRatedSeries(locator()));
   locator.registerLazySingleton(() => GetMovieDetail(locator()));
   locator.registerLazySingleton(() => GetMovieRecommendations(locator()));
+  locator.registerLazySingleton(() => GetSeriesDetail(locator()));
+  locator.registerLazySingleton(() => GetSeriesRecommendations(locator()));
   locator.registerLazySingleton(() => SearchMovies(locator()));
   locator.registerLazySingleton(() => GetWatchListStatus(locator()));
   locator.registerLazySingleton(() => SaveWatchlist(locator()));

@@ -69,19 +69,21 @@ class SeriesModel extends Equatable {
 
   Movie toEntity() {
     return Movie(
-        adult: this.adult,
-        backdropPath: this.backdropPath,
-        genreIds: this.genreIds,
-        id: this.id,
-        originalTitle: this.originalName,
-        overview: this.overview,
-        popularity: this.popularity,
-        posterPath: this.posterPath,
-        releaseDate: this.firstAirDate,
-        title: this.name,
-        video: false,
-        voteAverage: this.voteAverage,
-        voteCount: this.voteCount);
+      adult: this.adult,
+      backdropPath: this.backdropPath,
+      genreIds: this.genreIds,
+      id: this.id,
+      originalTitle: this.originalName,
+      overview: this.overview,
+      popularity: this.popularity,
+      posterPath: this.posterPath,
+      releaseDate: this.firstAirDate,
+      title: this.name,
+      video: false,
+      voteAverage: this.voteAverage,
+      voteCount: this.voteCount,
+      isSeries: true,
+    );
   }
 
   @override

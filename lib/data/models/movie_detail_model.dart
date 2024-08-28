@@ -113,6 +113,7 @@ class MovieDetailResponse extends Equatable {
       title: this.title,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      isSeries: false
     );
   }
 

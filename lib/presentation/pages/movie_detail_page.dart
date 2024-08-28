@@ -13,10 +13,18 @@ class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
 
   final int id;
-  MovieDetailPage({required this.id});
+  final bool isSeries;
+  const MovieDetailPage({Key? key, required this.id, required this.isSeries}) : super(key: key);
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
+
+  static Widget withArguments(Map<String, dynamic> arguments) {
+    return MovieDetailPage(
+      id: arguments['id'] as int,
+      isSeries: arguments['isSeries'] as bool,
+    );
+  }
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
@@ -24,8 +32,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(widget.id);
+      if (widget.isSeries) {
+        Provider.of<MovieDetailNotifier>(context, listen: false)
+            .fetchSeriesDetail(widget.id);
+      } else {
+        Provider.of<MovieDetailNotifier>(context, listen: false)
+            .fetchMovieDetail(widget.id);
+      }
+
       Provider.of<MovieDetailNotifier>(context, listen: false)
           .loadWatchlistStatus(widget.id);
     });
@@ -210,7 +224,10 @@ class DetailContent extends StatelessWidget {
                                               Navigator.pushReplacementNamed(
                                                 context,
                                                 MovieDetailPage.ROUTE_NAME,
-                                                arguments: movie.id,
+                                                arguments: {
+                                                  'id': movie.id,
+                                                  'isSeries': movie.isSeries,
+                                                },
                                               );
                                             },
                                             child: ClipRRect(
