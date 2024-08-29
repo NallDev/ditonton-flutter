@@ -39,6 +39,22 @@ final testMovieDetail = MovieDetail(
   isSeries: false,
 );
 
+final testSeriesDetail = MovieDetail(
+  adult: false,
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Action')],
+  id: 1,
+  originalTitle: 'originalTitle',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  releaseDate: '2024-08-01',
+  runtime: 0,
+  title: 'title',
+  voteAverage: 1.0,
+  voteCount: 1,
+  isSeries: true
+);
+
 final testMovieCache = MovieTable(
   id: 557,
   overview:
@@ -79,6 +95,14 @@ final testMovieTable = MovieTable(
   posterPath: 'posterPath',
   overview: 'overview',
   isSeries: false,
+);
+
+final testSeriesFromCache = Movie.watchlist(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+  isSeries: true,
 );
 
 final testSeriesTable = MovieTable(
