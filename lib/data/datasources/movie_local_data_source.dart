@@ -84,7 +84,6 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
     await databaseHelper.insertCacheTransaction(movies, 'popular movies');
   }
 
-
   @override
   Future<List<MovieTable>> getCachedPopularMovies() async {
     final result = await databaseHelper.getCacheMovies('popular movies');

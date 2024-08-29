@@ -81,6 +81,14 @@ final testMovieTable = MovieTable(
   isSeries: false,
 );
 
+final testSeriesTable = MovieTable(
+  id: 1,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+  isSeries: true,
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
