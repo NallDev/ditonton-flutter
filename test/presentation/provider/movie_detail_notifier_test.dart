@@ -79,17 +79,42 @@ void main() {
   );
   final tMovies = <Movie>[tMovie];
 
-  void _arrangeUsecase() {
+  final tSeries = Movie(
+    adult: false,
+    backdropPath: 'backdropPath',
+    genreIds: [1],
+    id: 1,
+    originalTitle: 'originalTitle',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    releaseDate: '2024-08-01',
+    title: 'title',
+    video: false,
+    voteAverage: 1,
+    voteCount: 1,
+    isSeries: true,
+  );
+  final tSeriesData = <Movie>[tSeries];
+
+  void _arrangeMovieUsecase() {
     when(mockGetMovieDetail.execute(tId))
         .thenAnswer((_) async => Right(testMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
         .thenAnswer((_) async => Right(tMovies));
   }
 
+  void _arrangeSeriesUsecase() {
+    when(mockGetSeriesDetail.execute(tId))
+        .thenAnswer((_) async => Right(testSeriesDetail));
+    when(mockGetSeriesRecommendations.execute(tId))
+        .thenAnswer((_) async => Right(tSeriesData));
+  }
+
   group('Get Movie Detail', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -99,7 +124,7 @@ void main() {
 
     test('should change state to Loading when usecase is called', () {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       provider.fetchMovieDetail(tId);
       // assert
@@ -109,7 +134,7 @@ void main() {
 
     test('should change movie when data is gotten successfully', () async {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -121,7 +146,7 @@ void main() {
     test('should change recommendation movies when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -133,7 +158,7 @@ void main() {
   group('Get Movie Recommendations', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -144,7 +169,7 @@ void main() {
     test('should update recommendation state when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      _arrangeMovieUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -160,6 +185,86 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
       await provider.fetchMovieDetail(tId);
+      // assert
+      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.message, 'Failed');
+    });
+  });
+
+  group('Get Series Detail', () {
+    test('should get data from the usecase', () async {
+      // arrange
+      _arrangeSeriesUsecase();
+      // act
+      await provider.fetchSeriesDetail(tId);
+      // assert
+      verify(mockGetSeriesDetail.execute(tId));
+      verify(mockGetSeriesRecommendations.execute(tId));
+    });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      _arrangeSeriesUsecase();
+      // act
+      provider.fetchSeriesDetail(tId);
+      // assert
+      expect(provider.movieState, RequestState.Loading);
+      expect(listenerCallCount, 1);
+    });
+
+    test('should change movie when data is gotten successfully', () async {
+      // arrange
+      _arrangeSeriesUsecase();
+      // act
+      await provider.fetchSeriesDetail(tId);
+      // assert
+      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movie, testSeriesDetail);
+      expect(listenerCallCount, 3);
+    });
+
+    test('should change recommendation movies when data is gotten successfully',
+            () async {
+          // arrange
+          _arrangeSeriesUsecase();
+          // act
+          await provider.fetchSeriesDetail(tId);
+          // assert
+          expect(provider.movieState, RequestState.Loaded);
+          expect(provider.movieRecommendations, tSeriesData);
+        });
+  });
+
+  group('Get Series Recommendations', () {
+    test('should get data from the usecase', () async {
+      // arrange
+      _arrangeSeriesUsecase();
+      // act
+      await provider.fetchSeriesDetail(tId);
+      // assert
+      verify(mockGetSeriesRecommendations.execute(tId));
+      expect(provider.movieRecommendations, tSeriesData);
+    });
+
+    test('should update recommendation state when data is gotten successfully',
+            () async {
+          // arrange
+          _arrangeSeriesUsecase();
+          // act
+          await provider.fetchSeriesDetail(tId);
+          // assert
+          expect(provider.recommendationState, RequestState.Loaded);
+          expect(provider.movieRecommendations, tSeriesData);
+        });
+
+    test('should update error message when request in successful', () async {
+      // arrange
+      when(mockGetSeriesDetail.execute(tId))
+          .thenAnswer((_) async => Right(testSeriesDetail));
+      when(mockGetSeriesRecommendations.execute(tId))
+          .thenAnswer((_) async => Left(ServerFailure('Failed')));
+      // act
+      await provider.fetchSeriesDetail(tId);
       // assert
       expect(provider.recommendationState, RequestState.Error);
       expect(provider.message, 'Failed');
