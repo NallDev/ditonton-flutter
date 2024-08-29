@@ -99,7 +99,6 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
 
     if (response.statusCode == 200) {
-      print("NOW PLAYING CUY ${json.decode(response.body)}");
       return SeriesResponse.fromJson(json.decode(response.body)).seriesList;
     } else {
       throw ServerException();
@@ -112,7 +111,6 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
 
     if (response.statusCode == 200) {
-      print("POPULAR CUY ${json.decode(response.body)}");
       return SeriesResponse.fromJson(json.decode(response.body)).seriesList;
     } else {
       throw ServerException();
