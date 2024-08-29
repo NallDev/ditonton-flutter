@@ -24,6 +24,7 @@ void main() {
   );
   final tMovieResponseModel =
       MovieResponse(movieList: <MovieModel>[tMovieModel]);
+
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
       // arrange
