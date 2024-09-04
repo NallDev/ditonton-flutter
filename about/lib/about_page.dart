@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:core/core.dart';
 
 class AboutPage extends StatelessWidget {
   static const ROUTE_NAME = '/about';
@@ -12,7 +13,7 @@ class AboutPage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color: const Color(0xFF003566),
+                  color: kPrussianBlue,
                   child: Center(
                     child: Image.asset(
                       'assets/circle-g.png',
@@ -24,7 +25,7 @@ class AboutPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(32.0),
-                  color: const Color(0xFFffc300),
+                  color: kMikadoYellow,
                   child: Text(
                     'Ditonton merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.',
                     style: TextStyle(color: Colors.black87, fontSize: 16),

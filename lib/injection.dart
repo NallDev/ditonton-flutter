@@ -29,7 +29,7 @@ import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
-import 'common/network_info.dart';
+import 'package:core/core.dart';
 import 'domain/usecases/get_series_detail.dart';
 import 'domain/usecases/get_series_recommendations.dart';
 
