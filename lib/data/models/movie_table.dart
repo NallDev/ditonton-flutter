@@ -1,8 +1,7 @@
-import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/data/models/series_model.dart';
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
+import 'package:core/core.dart';
 
 class MovieTable extends Equatable {
   final int id;

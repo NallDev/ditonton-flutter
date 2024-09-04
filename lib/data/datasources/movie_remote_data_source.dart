@@ -1,14 +1,9 @@
 import 'dart:convert';
 
 import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/data/models/movie_response.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/data/models/series_detail_model.dart';
-import 'package:ditonton/data/models/series_model.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/series_response.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
@@ -21,8 +16,6 @@ abstract class MovieRemoteDataSource {
   Future<List<SeriesModel>> getTopRatedSeries();
   Future<SeriesDetailResponse> getSeriesDetail(int id);
   Future<List<SeriesModel>> getSeriesRecommendations(int id);
-  Future<List<MovieModel>> searchMovies(String query);
-  Future<List<SeriesModel>> searchSeries(String query);
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -145,30 +138,6 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<SeriesModel>> getSeriesRecommendations(int id) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
-
-    if (response.statusCode == 200) {
-      return SeriesResponse.fromJson(json.decode(response.body)).seriesList;
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<List<MovieModel>> searchMovies(String query) async {
-    final response = await client
-        .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$query'));
-
-    if (response.statusCode == 200) {
-      return MovieResponse.fromJson(json.decode(response.body)).movieList;
-    } else {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<List<SeriesModel>> searchSeries(String query) async {
-    final response = await client
-        .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'));
 
     if (response.statusCode == 200) {
       return SeriesResponse.fromJson(json.decode(response.body)).seriesList;

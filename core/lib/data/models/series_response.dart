@@ -1,4 +1,4 @@
-import 'package:ditonton/data/models/series_model.dart';
+import 'package:core/data/models/series_model.dart';
 import 'package:equatable/equatable.dart';
 
 class SeriesResponse extends Equatable {

@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:search/domain/repositories/search_repository.dart';
 
 class SearchMovies {
-  final MovieRepository repository;
+  final SearchRepository repository;
 
   SearchMovies(this.repository);
 

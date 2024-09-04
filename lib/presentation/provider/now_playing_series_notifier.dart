@@ -1,6 +1,6 @@
 
 import 'package:core/core.dart';
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_series.dart';
 import 'package:flutter/foundation.dart';
 

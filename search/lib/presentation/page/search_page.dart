@@ -1,7 +1,6 @@
 
 import 'package:core/core.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import '../provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

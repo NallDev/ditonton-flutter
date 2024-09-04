@@ -13,6 +13,7 @@ dependencies:
 
   equatable: ^2.0.5
   google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
   data_connection_checker:
     git:
       url: https://github.com/chornthorn/data_connection_checker.git

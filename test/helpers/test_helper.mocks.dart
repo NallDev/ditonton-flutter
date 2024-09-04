@@ -19,7 +19,7 @@ import 'package:ditonton/data/models/movie_model.dart' as _i12;
 import 'package:ditonton/data/models/movie_table.dart' as _i15;
 import 'package:ditonton/data/models/series_detail_model.dart' as _i4;
 import 'package:ditonton/data/models/series_model.dart' as _i13;
-import 'package:ditonton/domain/entities/movie.dart' as _i9;
+import 'package:core/domain/entities/movie.dart' as _i9;
 import 'package:ditonton/domain/entities/movie_detail.dart' as _i10;
 import 'package:ditonton/domain/repositories/movie_repository.dart' as _i6;
 import 'package:http/http.dart' as _i5;

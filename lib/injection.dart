@@ -16,10 +16,8 @@ import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
-import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
@@ -30,6 +28,11 @@ import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 import 'package:core/core.dart';
+import 'package:search/data/datasources/search_remote_data_source.dart';
+import 'package:search/data/repositories/search_repository_impl.dart';
+import 'package:search/domain/repositories/search_repository.dart';
+import 'package:search/domain/usecase/search_movies.dart';
+import 'package:search/presentation/provider/movie_search_notifier.dart';
 import 'domain/usecases/get_series_detail.dart';
 import 'domain/usecases/get_series_recommendations.dart';
 
@@ -120,9 +123,18 @@ void init() {
     ),
   );
 
+  locator.registerLazySingleton<SearchRepository>(
+        () => SearchRepositoryImpl(
+      remoteDataSource: locator(),
+      networkInfo: locator(),
+    ),
+  );
+
   // data sources
   locator.registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<MovieLocalDataSource>(
       () => MovieLocalDataSourceImpl(databaseHelper: locator()));
 

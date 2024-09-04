@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ditonton/data/models/series_model.dart';
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../json_reader.dart';

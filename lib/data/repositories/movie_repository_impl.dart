@@ -5,7 +5,6 @@ import 'package:core/core.dart';
 import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_table.dart';
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
@@ -193,24 +192,6 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getSeriesRecommendations(id);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Movie>>> searchMovies(String query) async {
-    try {
-      final resultMovie = await remoteDataSource.searchMovies(query);
-      final resultSeries = await remoteDataSource.searchSeries(query);
-
-      final movieList = resultMovie.map((model) => model.toEntity()).toList();
-      final seriesList = resultSeries.map((model) => model.toEntity()).toList();
-      final movieCombine = [...seriesList, ...movieList];
-
-      return Right(movieCombine);
     } on ServerException {
       return Left(ServerFailure(''));
     } on SocketException {
