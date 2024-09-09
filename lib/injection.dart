@@ -32,7 +32,7 @@ import 'package:search/data/datasources/search_remote_data_source.dart';
 import 'package:search/data/repositories/search_repository_impl.dart';
 import 'package:search/domain/repositories/search_repository.dart';
 import 'package:search/domain/usecase/search_movies.dart';
-import 'package:search/presentation/provider/movie_search_notifier.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 import 'domain/usecases/get_series_detail.dart';
 import 'domain/usecases/get_series_recommendations.dart';
 
@@ -62,9 +62,9 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-    ),
+      () => SearchBloc(
+        locator(),
+      )
   );
   locator.registerFactory(
     () => PopularMoviesNotifier(

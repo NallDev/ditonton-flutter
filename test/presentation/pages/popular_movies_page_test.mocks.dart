@@ -3,16 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i8;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i7;
 
-import 'package:ditonton/common/state_enum.dart' as _i4;
-import 'package:core/domain/entities/movie.dart' as _i5;
+import 'package:core/core.dart' as _i4;
 import 'package:ditonton/domain/usecases/get_popular_movies.dart' as _i2;
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -63,15 +62,15 @@ class MockPopularMoviesNotifier extends _i1.Mock
       ) as _i4.RequestState);
 
   @override
-  List<_i5.Movie> get movies => (super.noSuchMethod(
+  List<_i4.Movie> get movies => (super.noSuchMethod(
         Invocation.getter(#movies),
-        returnValue: <_i5.Movie>[],
-      ) as List<_i5.Movie>);
+        returnValue: <_i4.Movie>[],
+      ) as List<_i4.Movie>);
 
   @override
   String get message => (super.noSuchMethod(
         Invocation.getter(#message),
-        returnValue: _i6.dummyValue<String>(
+        returnValue: _i5.dummyValue<String>(
           this,
           Invocation.getter(#message),
         ),
@@ -84,17 +83,17 @@ class MockPopularMoviesNotifier extends _i1.Mock
       ) as bool);
 
   @override
-  _i7.Future<void> fetchPopularMovies() => (super.noSuchMethod(
+  _i6.Future<void> fetchPopularMovies() => (super.noSuchMethod(
         Invocation.method(
           #fetchPopularMovies,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -103,7 +102,7 @@ class MockPopularMoviesNotifier extends _i1.Mock
       );
 
   @override
-  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
