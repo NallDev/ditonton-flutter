@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/domain/entities/genre.dart';
+import 'package:core/data/models/genre_model.dart';
+import 'package:core/data/models/movie_detail_model.dart';
+import 'package:core/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 

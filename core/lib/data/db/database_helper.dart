@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:ditonton/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../models/movie_table.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
@@ -14,9 +15,7 @@ class DatabaseHelper {
   static Database? _database;
 
   Future<Database?> get database async {
-    if (_database == null) {
-      _database = await _initDb();
-    }
+    _database ??= await _initDb();
     return _database;
   }
 

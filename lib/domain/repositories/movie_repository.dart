@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:core/domain/entities/movie_detail.dart';
 import 'package:core/core.dart';
 
 abstract class MovieRepository {
@@ -16,5 +16,4 @@ abstract class MovieRepository {
   Future<Either<Failure, String>> saveWatchlist(MovieDetail movie);
   Future<Either<Failure, String>> removeWatchlist(MovieDetail movie);
   Future<bool> isAddedToWatchlist(int id);
-  Future<Either<Failure, List<Movie>>> getWatchlistMovies();
 }
