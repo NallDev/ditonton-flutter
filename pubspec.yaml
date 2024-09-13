@@ -49,6 +49,8 @@ dependencies:
     path: search
   watchlist:
     path: watchlist
+  home:
+    path: home
 
 dev_dependencies:
   mockito: ^5.0.8

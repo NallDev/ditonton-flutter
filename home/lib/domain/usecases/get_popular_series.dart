@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
-import 'package:core/domain/entities/movie.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:home/domain/repositories/home_repository.dart';
 
 class GetPopularSeries {
-  final MovieRepository repository;
+  final HomeRepository repository;
 
   GetPopularSeries(this.repository);
 

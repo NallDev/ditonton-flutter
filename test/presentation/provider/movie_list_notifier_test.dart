@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
+import '../../../home/lib/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_series.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
