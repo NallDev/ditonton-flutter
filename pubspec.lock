@@ -938,6 +938,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  top_rated_series:
+    dependency: "direct main"
+    description:
+      path: top_rated_series
+      relative: true
+    source: path
+    version: "0.0.1"
   typed_data:
     dependency: transitive
     description:

@@ -13,6 +13,7 @@ dependencies:
   core:
     path: ../core
   flutter_bloc: ^8.1.6
+  firebase_crashlytics: ^4.1.0
 
 dev_dependencies:
   flutter_test:

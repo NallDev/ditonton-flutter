@@ -8,6 +8,7 @@ import 'package:popular_movies/presentation/pages/popular_movies_page.dart';
 import 'package:popular_series/presentation/pages/popular_series_page.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:top_rated_movies/presentation/pages/top_rated_movies_page.dart';
+import 'package:top_rated_series/presentation/pages/top_rated_series_page.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 
 import 'package:core/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
@@ -199,7 +200,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               _buildSubHeading(
                 title: 'Top Rated Series',
                 onTap: () => Navigator.pushNamed(
-                    context, "TopRatedSeriesPage.ROUTE_NAME"),
+                    context, TopRatedSeriesPage.ROUTE_NAME),
               ),
               BlocBuilder<TopRatedSeriesBloc, TopRatedSeriesState>(
                 builder: (context, state) {

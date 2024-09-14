@@ -18,6 +18,7 @@ dependencies:
   http: ^1.2.2
   dartz: ^0.10.0-nullsafety.2
   flutter_bloc: ^8.1.6
+  firebase_crashlytics: ^4.1.0
   data_connection_checker:
     git:
       url: https://github.com/chornthorn/data_connection_checker.git

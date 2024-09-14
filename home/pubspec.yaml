@@ -28,6 +28,8 @@ dependencies:
     path: ../now_playing_series
   popular_series:
     path: ../popular_series
+  top_rated_series:
+    path: ../top_rated_series
   flutter_bloc: ^8.1.6
   http: ^1.2.2
   dartz: ^0.10.0-nullsafety.2

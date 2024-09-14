@@ -7,19 +7,14 @@ import 'package:core/presentation/bloc/popular_series/popular_series_bloc.dart';
 import 'package:core/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:core/presentation/bloc/top_rated_series/top_rated_series_bloc.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
 import 'package:now_playing_movies/presentation/pages/now_playing_movies_page.dart';
 import 'package:now_playing_series/presentation/pages/now_playing_series_page.dart';
 import 'package:popular_series/presentation/pages/popular_series_page.dart';
 import 'package:top_rated_movies/presentation/pages/top_rated_movies_page.dart';
+import 'package:top_rated_series/presentation/pages/top_rated_series_page.dart';
 import 'package:watchlist/presentation/bloc/watchlist_bloc.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/now_playing_series_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_series_notifier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,21 +59,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<TopRatedSeriesBloc>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<NowPlayingSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
