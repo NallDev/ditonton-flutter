@@ -57,6 +57,8 @@ dependencies:
     path: popular_movies
   now_playing_series:
     path: now_playing_series
+  popular_series:
+    path: popular_series
 
 dev_dependencies:
   mockito: ^5.0.8

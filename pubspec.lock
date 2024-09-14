@@ -712,6 +712,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  popular_series:
+    dependency: "direct main"
+    description:
+      path: popular_series
+      relative: true
+    source: path
+    version: "0.0.1"
   provider:
     dependency: "direct main"
     description:

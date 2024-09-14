@@ -1,9 +1,7 @@
-
 import 'package:core/core.dart';
-import 'package:ditonton/presentation/provider/popular_series_notifier.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/bloc/popular_series/popular_series_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-series';
@@ -16,9 +14,11 @@ class _PopularSeriesPageState extends State<PopularSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularSeriesNotifier>(context, listen: false)
-            .fetchPopularSeries());
+    Future.microtask(() {
+      if (mounted) {
+        context.read<PopularSeriesBloc>().add(FetchPopularSeries());
+      }
+    });
   }
 
   @override
@@ -29,25 +29,27 @@ class _PopularSeriesPageState extends State<PopularSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularSeriesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+        child: BlocBuilder<PopularSeriesBloc, PopularSeriesState>(
+          builder: (context, state) {
+            if (state is PopularSeriesLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is PopularSeriesHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final movie = state.result[index];
                   return MovieCard(movie);
                 },
-                itemCount: data.movies.length,
+                itemCount: state.result.length,
               );
-            } else {
+            } else if (state is PopularSeriesError) {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(state.message),
               );
+            } else {
+              return Text('No Data');
             }
           },
         ),
