@@ -1,18 +1,18 @@
-
 import 'package:core/core.dart';
 import 'package:about/about.dart';
+import 'package:core/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
+import 'package:core/presentation/bloc/now_playing_series/now_playing_series_bloc.dart';
+import 'package:core/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/popular_series/popular_series_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_series/top_rated_series_bloc.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/now_playing_series_page.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_series_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
-import 'package:home/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
-import 'package:home/presentation/bloc/now_playing_series/now_playing_series_bloc.dart';
-import 'package:home/presentation/bloc/popular_movies/popular_movies_bloc.dart';
-import 'package:home/presentation/bloc/popular_series/popular_series_bloc.dart';
-import 'package:home/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
-import 'package:home/presentation/bloc/top_rated_series/top_rated_series_bloc.dart';
+import 'package:now_playing_movies/presentation/pages/now_playing_movies_page.dart';
 import 'package:watchlist/presentation/bloc/watchlist_bloc.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -103,6 +103,8 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case '/home':
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
+            case NowPlayingMoviesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => NowPlayingMoviesPage());
             case PopularMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:

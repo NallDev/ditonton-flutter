@@ -1,6 +1,5 @@
-
 import 'package:core/core.dart';
-import 'package:home/domain/usecases/get_popular_series.dart';
+import 'package:core/domain/usecases/get_popular_series.dart';
 import 'package:flutter/foundation.dart';
 
 class PopularSeriesNotifier extends ChangeNotifier {

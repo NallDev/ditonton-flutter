@@ -51,6 +51,8 @@ dependencies:
     path: watchlist
   home:
     path: home
+  now_playing_movies:
+    path: now_playing_movies
 
 dev_dependencies:
   mockito: ^5.0.8

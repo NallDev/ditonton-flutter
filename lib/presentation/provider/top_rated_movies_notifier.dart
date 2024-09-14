@@ -1,6 +1,5 @@
-
 import 'package:core/core.dart';
-import 'package:home/domain/usecases/get_top_rated_movies.dart';
+import 'package:core/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/foundation.dart';
 
 class TopRatedMoviesNotifier extends ChangeNotifier {

@@ -3,15 +3,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
-import 'package:home/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 
-import '../bloc/now_playing_series/now_playing_series_bloc.dart';
-import '../bloc/popular_series/popular_series_bloc.dart';
-import '../bloc/top_rated_movies/top_rated_movies_bloc.dart';
-import '../bloc/top_rated_series/top_rated_series_bloc.dart';
+import 'package:core/presentation/bloc/now_playing_movies/now_playing_movies_bloc.dart';
+import 'package:core/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/now_playing_series/now_playing_series_bloc.dart';
+import 'package:core/presentation/bloc/popular_series/popular_series_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_series/top_rated_series_bloc.dart';
+
+import 'package:now_playing_movies/presentation/pages/now_playing_movies_page.dart';
+
 
 class HomeMoviePage extends StatefulWidget {
   @override
@@ -89,9 +92,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Now Playing Movies',
+                onTap: () => Navigator.pushNamed(
+                    context, NowPlayingMoviesPage.ROUTE_NAME),
               ),
               BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
                 builder: (context, state) {
@@ -109,7 +113,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 },
               ),
               _buildSubHeading(
-                title: 'Popular',
+                title: 'Popular Movies',
                 onTap: () => Navigator.pushNamed(
                     context, "PopularMoviesPage.ROUTE_NAME"),
               ),
@@ -129,7 +133,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 },
               ),
               _buildSubHeading(
-                title: 'Top Rated',
+                title: 'Top Rated Movies',
                 onTap: () => Navigator.pushNamed(
                     context, "TopRatedMoviesPage.ROUTE_NAME"),
               ),
