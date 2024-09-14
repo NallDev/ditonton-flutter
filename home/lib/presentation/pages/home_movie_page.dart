@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:now_playing_series/presentation/pages/now_playing_series_page.dart';
+import 'package:popular_movies/presentation/pages/popular_movies_page.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 
@@ -116,7 +117,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               _buildSubHeading(
                 title: 'Popular Movies',
                 onTap: () => Navigator.pushNamed(
-                    context, "PopularMoviesPage.ROUTE_NAME"),
+                    context, PopularMoviesPage.ROUTE_NAME),
               ),
               BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
                 builder: (context, state) {

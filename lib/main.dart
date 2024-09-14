@@ -7,7 +7,6 @@ import 'package:core/presentation/bloc/popular_series/popular_series_bloc.dart';
 import 'package:core/presentation/bloc/top_rated_movies/top_rated_movies_bloc.dart';
 import 'package:core/presentation/bloc/top_rated_series/top_rated_series_bloc.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_series_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_series_page.dart';
@@ -30,6 +29,7 @@ import 'package:ditonton/injection.dart' as di;
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:home/presentation/pages/home_movie_page.dart';
+import 'package:popular_movies/presentation/pages/popular_movies_page.dart';
 
 import 'firebase_options.dart';
 

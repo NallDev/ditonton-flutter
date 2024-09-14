@@ -705,6 +705,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
+  popular_movies:
+    dependency: "direct main"
+    description:
+      path: popular_movies
+      relative: true
+    source: path
+    version: "0.0.1"
   provider:
     dependency: "direct main"
     description:

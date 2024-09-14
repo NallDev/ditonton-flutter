@@ -53,6 +53,8 @@ dependencies:
     path: home
   now_playing_movies:
     path: now_playing_movies
+  popular_movies:
+    path: popular_movies
   now_playing_series:
     path: now_playing_series
 
