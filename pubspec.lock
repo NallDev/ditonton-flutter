@@ -602,6 +602,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  now_playing_series:
+    dependency: "direct main"
+    description:
+      path: now_playing_series
+      relative: true
+    source: path
+    version: "0.0.1"
   octo_image:
     dependency: transitive
     description:

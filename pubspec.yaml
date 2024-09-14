@@ -53,6 +53,8 @@ dependencies:
     path: home
   now_playing_movies:
     path: now_playing_movies
+  now_playing_series:
+    path: now_playing_series
 
 dev_dependencies:
   mockito: ^5.0.8

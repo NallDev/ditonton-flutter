@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:now_playing_series/presentation/pages/now_playing_series_page.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 
@@ -155,7 +156,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               _buildSubHeading(
                 title: 'Now Playing Series',
                 onTap: () => Navigator.pushNamed(
-                    context, "NowPlayingSeriesPage.ROUTE_NAME"),
+                    context, NowPlayingSeriesPage.ROUTE_NAME),
               ),
               BlocBuilder<NowPlayingSeriesBloc, NowPlayingSeriesState>(
                 builder: (context, state) {
