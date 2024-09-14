@@ -20,10 +20,12 @@ dependencies:
     path: ../search
   now_playing_movies:
     path: ../now_playing_movies
-  now_playing_series:
-    path: ../now_playing_series
   popular_movies:
     path: ../popular_movies
+  top_rated_movies:
+    path: ../top_rated_movies
+  now_playing_series:
+    path: ../now_playing_series
   popular_series:
     path: ../popular_series
   flutter_bloc: ^8.1.6

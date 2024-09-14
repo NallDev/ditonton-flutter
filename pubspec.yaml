@@ -55,6 +55,8 @@ dependencies:
     path: now_playing_movies
   popular_movies:
     path: popular_movies
+  top_rated_movies:
+    path: top_rated_movies
   now_playing_series:
     path: now_playing_series
   popular_series:
