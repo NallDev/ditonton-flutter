@@ -1,24 +1,26 @@
 import 'dart:convert';
 
-import 'package:core/data/models/movie_detail_model.dart';
-import 'package:core/core.dart';
+import 'package:core/data/models/movie_model.dart';
+import 'package:core/data/models/movie_response.dart';
+import 'package:core/data/models/series_model.dart';
 import 'package:core/data/models/series_detail_model.dart';
+import 'package:core/data/models/movie_detail_model.dart';
+import 'package:core/data/models/series_response.dart';
+import 'package:core/utils/constants.dart';
+import 'package:core/utils/exception.dart';
 import 'package:http/http.dart' as http;
 
-abstract class MovieRemoteDataSource {
+abstract class DetailRemoteDataSource {
   Future<MovieDetailResponse> getMovieDetail(int id);
   Future<List<MovieModel>> getMovieRecommendations(int id);
   Future<SeriesDetailResponse> getSeriesDetail(int id);
   Future<List<SeriesModel>> getSeriesRecommendations(int id);
 }
 
-class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  static const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
-  static const BASE_URL = 'https://api.themoviedb.org/3';
-
+class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
   final http.Client client;
 
-  MovieRemoteDataSourceImpl({required this.client});
+  DetailRemoteDataSourceImpl({required this.client});
 
   @override
   Future<MovieDetailResponse> getMovieDetail(int id) async {
@@ -47,7 +49,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<SeriesDetailResponse> getSeriesDetail(int id) async {
     final response =
-        await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
+    await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
       return SeriesDetailResponse.fromJson(json.decode(response.body));

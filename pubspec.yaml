@@ -63,6 +63,8 @@ dependencies:
     path: popular_series
   top_rated_series:
     path: top_rated_series
+  detail:
+    path: detail
 
 dev_dependencies:
   mockito: ^5.0.8

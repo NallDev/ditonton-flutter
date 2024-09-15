@@ -1,6 +1,7 @@
 import 'package:about/about_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:detail/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:now_playing_series/presentation/pages/now_playing_series_page.dart';
@@ -265,7 +266,7 @@ class MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  "MovieDetailPage.ROUTE_NAME",
+                  MovieDetailPage.ROUTE_NAME,
                   arguments: {
                     'id': movie.id,
                     'isSeries': movie.isSeries,

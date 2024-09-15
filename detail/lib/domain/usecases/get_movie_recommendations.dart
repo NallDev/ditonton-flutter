@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/domain/entities/movie.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:detail/domain/repositories/detail_repository.dart';
 import 'package:core/core.dart';
 
 class GetMovieRecommendations {
-  final MovieRepository repository;
+  final DetailRepository repository;
 
   GetMovieRecommendations(this.repository);
 

@@ -1,19 +1,23 @@
 import 'dart:io';
 
-import 'package:dartz/dartz.dart';
-import 'package:core/core.dart';
-import 'package:ditonton/data/datasources/movie_local_data_source.dart';
-import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:core/data/models/movie_table.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:core/utils/exception.dart';
+import 'package:core/utils/failure.dart';
+import 'package:core/utils/network_info.dart';
+import 'package:dartz/dartz.dart';
 
-class MovieRepositoryImpl implements MovieRepository {
-  final MovieRemoteDataSource remoteDataSource;
-  final MovieLocalDataSource localDataSource;
+import '../../domain/repositories/detail_repository.dart';
+import '../datasources/detail_local_data_source.dart';
+import '../datasources/detail_remote_data_source.dart';
+
+class DetailRepositoryImpl implements DetailRepository {
+  final DetailRemoteDataSource remoteDataSource;
+  final DetailLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  MovieRepositoryImpl({
+  DetailRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
     required this.networkInfo,

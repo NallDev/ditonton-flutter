@@ -1,17 +1,17 @@
-import 'package:core/core.dart';
 import 'package:core/data/db/database_helper.dart';
 import 'package:core/data/models/movie_table.dart';
+import 'package:core/utils/exception.dart';
 
-abstract class MovieLocalDataSource {
+abstract class DetailLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
   Future<String> removeWatchlist(MovieTable movie);
   Future<MovieTable?> getMovieById(int id);
 }
 
-class MovieLocalDataSourceImpl implements MovieLocalDataSource {
+class DetailLocalDataSourceImpl implements DetailLocalDataSource {
   final DatabaseHelper databaseHelper;
 
-  MovieLocalDataSourceImpl({required this.databaseHelper});
+  DetailLocalDataSourceImpl({required this.databaseHelper});
 
   @override
   Future<String> insertWatchlist(MovieTable movie) async {

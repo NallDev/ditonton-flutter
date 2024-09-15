@@ -16,16 +16,19 @@ import 'package:core/data/repositories/movies_repository_impl.dart';
 import 'package:core/data/datasources/movies_local_data_source.dart';
 import 'package:core/data/datasources/movies_remote_data_source.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:ditonton/data/datasources/movie_local_data_source.dart';
-import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
-import 'package:ditonton/data/repositories/movie_repository_impl.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
-import 'package:ditonton/domain/usecases/get_movie_detail.dart';
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
-import 'package:ditonton/domain/usecases/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/save_watchlist.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
+import 'package:detail/data/datasources/detail_local_data_source.dart';
+import 'package:detail/data/datasources/detail_remote_data_source.dart';
+import 'package:detail/domain/repositories/detail_repository.dart';
+import 'package:detail/domain/usecases/get_movie_detail.dart';
+import 'package:detail/domain/usecases/get_movie_recommendations.dart';
+import 'package:detail/domain/usecases/get_series_detail.dart';
+import 'package:detail/domain/usecases/get_series_recommendations.dart';
+import 'package:detail/domain/usecases/get_watchlist_status.dart';
+import 'package:detail/domain/usecases/remove_watchlist.dart';
+import 'package:detail/domain/usecases/save_watchlist.dart';
+import 'package:detail/presentation/bloc/detail_bloc.dart';
+import 'package:detail/data/repositories/detail_repository_impl.dart';
+import 'package:detail/presentation/bloc/detail_watchlist_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -40,8 +43,6 @@ import 'package:watchlist/data/repositories/watchlist_repository_impl.dart';
 import 'package:watchlist/domain/repositories/watchlist_repository.dart';
 import 'package:watchlist/domain/usecases/get_watchlist_movies.dart';
 import 'package:watchlist/presentation/bloc/watchlist_bloc.dart';
-import 'domain/usecases/get_series_detail.dart';
-import 'domain/usecases/get_series_recommendations.dart';
 
 final locator = GetIt.instance;
 
@@ -51,29 +52,33 @@ void init() {
     () => NowPlayingMoviesBloc(getNowPlayingMovies: locator()),
   );
   locator.registerFactory(
-        () => PopularMoviesBloc(getPopularMovies: locator()),
+    () => PopularMoviesBloc(getPopularMovies: locator()),
   );
   locator.registerFactory(
-        () => TopRatedMoviesBloc(getTopRatedMovies: locator()),
+    () => TopRatedMoviesBloc(getTopRatedMovies: locator()),
   );
   locator.registerFactory(
-        () => NowPlayingSeriesBloc(getNowPlayingSeries: locator()),
+    () => NowPlayingSeriesBloc(getNowPlayingSeries: locator()),
   );
   locator.registerFactory(
-        () => PopularSeriesBloc(getPopularSeries: locator()),
+    () => PopularSeriesBloc(getPopularSeries: locator()),
   );
   locator.registerFactory(
-        () => TopRatedSeriesBloc(getTopRatedSeries: locator()),
+    () => TopRatedSeriesBloc(getTopRatedSeries: locator()),
   );
   locator.registerFactory(
-    () => MovieDetailNotifier(
+    () => DetailBloc(
       getMovieDetail: locator(),
       getSeriesDetail: locator(),
       getMovieRecommendations: locator(),
       getSeriesRecommendations: locator(),
-      getWatchListStatus: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => DetailWatchlistBloc(
       saveWatchlist: locator(),
       removeWatchlist: locator(),
+      getWatchListStatus: locator(),
     ),
   );
   locator.registerFactory(() => SearchBloc(
@@ -111,8 +116,8 @@ void init() {
     ),
   );
 
-  locator.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(
+  locator.registerLazySingleton<DetailRepository>(
+    () => DetailRepositoryImpl(
       remoteDataSource: locator(),
       localDataSource: locator(),
       networkInfo: locator(),
@@ -135,12 +140,12 @@ void init() {
       () => MoviesRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<MoviesLocalDataSource>(
       () => MoviesLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<DetailRemoteDataSource>(
+      () => DetailRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<SearchRemoteDataSource>(
       () => SearchRemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<MovieLocalDataSource>(
-      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<DetailLocalDataSource>(
+      () => DetailLocalDataSourceImpl(databaseHelper: locator()));
   locator.registerLazySingleton<WatchlistLocalDataSource>(
       () => WatchlistLocalDataSourceImpl(databaseHelper: locator()));
 

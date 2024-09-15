@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:detail/domain/repositories/detail_repository.dart';
 import 'package:core/core.dart';
 
 class GetSeriesDetail {
-  final MovieRepository repository;
+  final DetailRepository repository;
 
   GetSeriesDetail(this.repository);
 
