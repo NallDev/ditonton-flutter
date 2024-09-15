@@ -1,1 +1,1 @@
-[![Codemagic build status](https://api.codemagic.io/apps/66d7dad7f7ce7ce82367beba/66d7dad7f7ce7ce82367beb9/status_badge.svg)](https://codemagic.io/app/66d7dad7f7ce7ce82367beba/66d7dad7f7ce7ce82367beb9/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/66e6f0e7633a06eeed64936d/66e6f0e7633a06eeed64936c/status_badge.svg)](https://codemagic.io/app/66e6f0e7633a06eeed64936d/66e6f0e7633a06eeed64936c/latest_build)
