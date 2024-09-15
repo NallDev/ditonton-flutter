@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:http/io_client.dart';
 
 import '../../utils/constants.dart';
 import '../../utils/exception.dart';
 import '../models/movie_model.dart';
 import '../models/movie_response.dart';
 import '../models/series_model.dart';
-
-import 'package:http/http.dart' as http;
 
 import '../models/series_response.dart';
 
@@ -21,9 +23,21 @@ abstract class MoviesRemoteDataSource{
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
 
-  final http.Client client;
+  late final IOClient client;
 
-  MoviesRemoteDataSourceImpl({required this.client});
+  MoviesRemoteDataSourceImpl() {
+    _initializeHttpClient();
+  }
+
+  Future<void> _initializeHttpClient() async {
+    final sslCert = await rootBundle.load('packages/core/assets/certificates.pem');
+    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+
+    HttpClient client = HttpClient(context: securityContext);
+    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    this.client = IOClient(client);
+  }
 
   @override
   Future<List<MovieModel>> getNowPlayingMovies() async {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:core/data/models/movie_model.dart';
 import 'package:core/data/models/movie_response.dart';
@@ -8,7 +9,8 @@ import 'package:core/data/models/movie_detail_model.dart';
 import 'package:core/data/models/series_response.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/utils/exception.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
+import 'package:http/io_client.dart';
 
 abstract class DetailRemoteDataSource {
   Future<MovieDetailResponse> getMovieDetail(int id);
@@ -18,9 +20,21 @@ abstract class DetailRemoteDataSource {
 }
 
 class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
-  final http.Client client;
+  final IOClient client;
 
-  DetailRemoteDataSourceImpl({required this.client});
+  DetailRemoteDataSourceImpl._(this.client);
+
+  static Future<DetailRemoteDataSourceImpl> create() async {
+    final sslCert = await rootBundle.load('packages/detail/assets/certificates.pem');
+    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+
+    HttpClient httpClient = HttpClient(context: securityContext);
+    httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    final ioClient = IOClient(httpClient);
+
+    return DetailRemoteDataSourceImpl._(ioClient);
+  }
 
   @override
   Future<MovieDetailResponse> getMovieDetail(int id) async {

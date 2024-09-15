@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:http/io_client.dart';
 import 'package:core/core.dart';
-
-import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 
 abstract class SearchRemoteDataSource {
   Future<List<MovieModel>> searchMovies(String query);
@@ -11,9 +12,21 @@ abstract class SearchRemoteDataSource {
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
 
-  final http.Client client;
+  late final IOClient client;
 
-  SearchRemoteDataSourceImpl({required this.client});
+  SearchRemoteDataSourceImpl() {
+    _initializeHttpClient();
+  }
+
+  Future<void> _initializeHttpClient() async {
+    final sslCert = await rootBundle.load('packages/search/assets/certificates.pem');
+    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+
+    HttpClient client = HttpClient(context: securityContext);
+    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    this.client = IOClient(client);
+  }
 
   @override
   Future<List<MovieModel>> searchMovies(String query) async {

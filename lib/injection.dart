@@ -46,7 +46,7 @@ import 'package:watchlist/presentation/bloc/watchlist_bloc.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void>  init() async {
   // provider
   locator.registerFactory(
     () => NowPlayingMoviesBloc(getNowPlayingMovies: locator()),
@@ -137,13 +137,13 @@ void init() {
 
   // data sources
   locator.registerLazySingleton<MoviesRemoteDataSource>(
-      () => MoviesRemoteDataSourceImpl(client: locator()));
+      () => MoviesRemoteDataSourceImpl());
   locator.registerLazySingleton<MoviesLocalDataSource>(
       () => MoviesLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<DetailRemoteDataSource>(
-      () => DetailRemoteDataSourceImpl(client: locator()));
+  locator.registerSingletonAsync<DetailRemoteDataSource>(
+        () async => await DetailRemoteDataSourceImpl.create());
   locator.registerLazySingleton<SearchRemoteDataSource>(
-      () => SearchRemoteDataSourceImpl(client: locator()));
+      () => SearchRemoteDataSourceImpl());
   locator.registerLazySingleton<DetailLocalDataSource>(
       () => DetailLocalDataSourceImpl(databaseHelper: locator()));
   locator.registerLazySingleton<WatchlistLocalDataSource>(
@@ -158,4 +158,6 @@ void init() {
   // external
   locator.registerLazySingleton(() => http.Client());
   locator.registerLazySingleton(() => DataConnectionChecker());
+
+  await locator.allReady();
 }

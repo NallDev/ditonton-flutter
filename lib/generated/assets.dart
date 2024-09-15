@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsCertificates = 'assets/certificates.pem';
   static const String assetsCircleG = 'assets/circle-g.png';
   static const String assetsGlitch = 'assets/glitch.frag';
 
