@@ -22,7 +22,7 @@ abstract class DetailRemoteDataSource {
 class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
   final IOClient client;
 
-  DetailRemoteDataSourceImpl._(this.client);
+  DetailRemoteDataSourceImpl({required this.client});
 
   static Future<DetailRemoteDataSourceImpl> create() async {
     final sslCert = await rootBundle.load('packages/detail/assets/certificates.pem');
@@ -33,7 +33,7 @@ class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
     httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
     final ioClient = IOClient(httpClient);
 
-    return DetailRemoteDataSourceImpl._(ioClient);
+    return DetailRemoteDataSourceImpl(client: ioClient);
   }
 
   @override

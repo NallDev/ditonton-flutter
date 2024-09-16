@@ -1,9 +1,18 @@
 import 'dart:io';
+import 'package:path/path.dart' as path;
 
 String readJson(String name) {
-  var dir = Directory.current.path;
-  if (dir.endsWith('/test')) {
-    dir = dir.replaceAll('/test', '');
+  final pathsToTry = [
+    path.join('test', name),
+    path.join('core', 'test', name),
+  ];
+
+  for (final possiblePath in pathsToTry) {
+    final file = File(possiblePath);
+    if (file.existsSync()) {
+      return file.readAsStringSync();
+    }
   }
-  return File('$dir/test/$name').readAsStringSync();
+
+  throw Exception('File not found: $name');
 }

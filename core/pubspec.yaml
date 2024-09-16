@@ -4,7 +4,7 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: ^3.5.1
+  sdk: ">=3.5.3 <=4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -21,6 +21,7 @@ dependencies:
   dartz: ^0.10.0-nullsafety.2
   flutter_bloc: ^8.1.6
   firebase_crashlytics: ^4.1.0
+  path: ^1.9.0
   data_connection_checker:
     git:
       url: https://github.com/chornthorn/data_connection_checker.git

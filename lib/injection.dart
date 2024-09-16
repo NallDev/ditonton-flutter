@@ -136,14 +136,14 @@ Future<void>  init() async {
   );
 
   // data sources
-  locator.registerLazySingleton<MoviesRemoteDataSource>(
-      () => MoviesRemoteDataSourceImpl());
+  locator.registerSingletonAsync<MoviesRemoteDataSource>(
+      () async => await MoviesRemoteDataSourceImpl.create());
   locator.registerLazySingleton<MoviesLocalDataSource>(
       () => MoviesLocalDataSourceImpl(databaseHelper: locator()));
   locator.registerSingletonAsync<DetailRemoteDataSource>(
         () async => await DetailRemoteDataSourceImpl.create());
-  locator.registerLazySingleton<SearchRemoteDataSource>(
-      () => SearchRemoteDataSourceImpl());
+  locator.registerSingletonAsync<SearchRemoteDataSource>(
+      () async => await SearchRemoteDataSourceImpl.create());
   locator.registerLazySingleton<DetailLocalDataSource>(
       () => DetailLocalDataSourceImpl(databaseHelper: locator()));
   locator.registerLazySingleton<WatchlistLocalDataSource>(

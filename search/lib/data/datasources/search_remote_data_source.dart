@@ -14,18 +14,18 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
 
   late final IOClient client;
 
-  SearchRemoteDataSourceImpl() {
-    _initializeHttpClient();
-  }
+  SearchRemoteDataSourceImpl({required this.client});
 
-  Future<void> _initializeHttpClient() async {
+  static Future<SearchRemoteDataSourceImpl> create() async {
     final sslCert = await rootBundle.load('packages/search/assets/certificates.pem');
     SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
 
-    HttpClient client = HttpClient(context: securityContext);
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
-    this.client = IOClient(client);
+    HttpClient httpClient = HttpClient(context: securityContext);
+    httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    final ioClient = IOClient(httpClient);
+
+    return SearchRemoteDataSourceImpl(client: ioClient);
   }
 
   @override
