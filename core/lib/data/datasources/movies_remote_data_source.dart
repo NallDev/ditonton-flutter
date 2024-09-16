@@ -25,18 +25,18 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
 
   late final IOClient client;
 
-  MoviesRemoteDataSourceImpl() {
-    _initializeHttpClient();
-  }
+  MoviesRemoteDataSourceImpl({required this.client});
 
-  Future<void> _initializeHttpClient() async {
+  static Future<MoviesRemoteDataSourceImpl> create() async {
     final sslCert = await rootBundle.load('packages/core/assets/certificates.pem');
     SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
 
-    HttpClient client = HttpClient(context: securityContext);
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
-    this.client = IOClient(client);
+    HttpClient httpClient = HttpClient(context: securityContext);
+    httpClient.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    final ioClient = IOClient(httpClient);
+
+    return MoviesRemoteDataSourceImpl(client: ioClient);
   }
 
   @override
