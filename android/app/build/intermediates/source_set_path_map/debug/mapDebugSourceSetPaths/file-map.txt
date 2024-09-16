@@ -1,7 +1,0 @@
-com.dicoding.ditonton.app-pngs-0 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\build\generated\res\pngs\debug
-com.dicoding.ditonton.app-resValues-1 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\build\generated\res\resValues\debug
-com.dicoding.ditonton.app-packageDebugResources-2 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.dicoding.ditonton.app-packageDebugResources-3 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.dicoding.ditonton.app-debug-4 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.dicoding.ditonton.app-debug-5 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\src\debug\res
-com.dicoding.ditonton.app-main-6 F:\latihan aja\a199-flutter-expert-project-main\a199-flutter-expert-project-main\android\app\src\main\res

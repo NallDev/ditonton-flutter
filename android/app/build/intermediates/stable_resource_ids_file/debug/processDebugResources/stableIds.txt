@@ -1,4 +1,0 @@
-com.dicoding.ditonton:style/LaunchTheme = 0x7f030000
-com.dicoding.ditonton:mipmap/ic_launcher = 0x7f020000
-com.dicoding.ditonton:style/NormalTheme = 0x7f030001
-com.dicoding.ditonton:drawable/launch_background = 0x7f010000
